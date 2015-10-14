@@ -74,11 +74,11 @@
 //                //
 ////////////////////
 
-.entry-form-container {
+.entry-form {
 
 }
 
-.entry-form-container__nav-buttons {
+.entry-form__nav-buttons {
   display: flex;
 
   .nav-buttons__button {
@@ -89,13 +89,17 @@
   }
 }
 
-.entry-form-container__entry-form {
+.entry-form__entry-fields {
   display: flex;
 }
 
-.entry-form__input {
+.entry-fields__input {
   border: 1px solid black;
   margin-right: 2px;
+}
+
+.entry-fields__submit-button {
+  border: 1px solid blue;
 }
 
 ////////////////////////

@@ -15,10 +15,7 @@
     </div>
 
     <div class="app-content">
-      {{entry-form formDescriptionValue=unsavedEntryDescription
-                   formProjectValue=unsavedEntryProject
-                   formTimeValue=unsavedEntryTime
-                   storeEntry=(action "handleSubmitEntry")}}
+      {{entry-form submit=(action "handleSubmitEntry")}}
 
       <div class="app-outlet">
         {{outlet}}

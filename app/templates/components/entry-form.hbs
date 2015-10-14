@@ -1,4 +1,4 @@
-<ul class="entry-form-container__nav-buttons">
+<ul class="entry-form__nav-buttons">
   <li class="nav-buttons__button">
     2D-ago
   </li>
@@ -13,15 +13,15 @@
   </li>
 </ul>
 
-<div class="entry-form-container__entry-form">
-  {{entry-form/time-input enter=(action attrs.storeEntry)
-                          inputTimeValue=attrs.formTimeValue}}
+<div class="entry-form__entry-fields">
+  {{entry-form/time-input enter=(action "handleSubmitEntry")
+                          value=unsavedEntryTime}}
 
-  {{entry-form/project-input enter=(action attrs.storeEntry)
-                             inputProjectValue=attrs.formProjectValue}}
+  {{entry-form/project-input enter=(action "handleSubmitEntry")
+                             value=unsavedEntryProject}}
 
-  {{entry-form/description-input enter=(action attrs.storeEntry)
-                                 inputDescriptionValue=attrs.formDescriptionValue}}
+  {{entry-form/description-input enter=(action "handleSubmitEntry")
+                                 value=unsavedEntryDescription}}
 
-  {{entry-form/submit-button click=(action attrs.storeEntry)}}
+  {{entry-form/submit-button on-click=(action "handleSubmitEntry")}}
 </div>
