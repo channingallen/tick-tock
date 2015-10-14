@@ -1,1 +1,4 @@
-<input type="button" name="name" value="description-input">
+{{input class="entry-form__input entry-form__description-input"
+        enter=(action "submitNewEntry")
+        placeholder="DESCRIPTION"
+        value=attrs.inputDescriptionValue}}

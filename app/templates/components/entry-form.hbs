@@ -14,7 +14,8 @@
 </ul>
 
 <div class="entry-form-container__entry-form">
-  {{entry-form/time-input}}
-  {{entry-form/project-input}}
-  {{entry-form/description-input}}
+  {{entry-form/time-input inputTimeValue=attrs.formTimeValue}}
+  {{entry-form/project-input inputProjectValue=attrs.formProjectValue}}
+  {{entry-form/description-input inputDescriptionValue=attrs.formDescriptionValue}}
+  {{entry-form/submit-button}}
 </div>

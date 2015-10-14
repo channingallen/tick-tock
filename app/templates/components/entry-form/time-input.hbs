@@ -1,1 +1,5 @@
-<input type="button" name="name" value="time-input">
+{{input class="entry-form__input entry-form__time-input"
+        enter=(action "submitNewEntry")
+        focusOnInsert=true
+        placeholder="TIME"
+        value=attrs.inputTimeValue}}

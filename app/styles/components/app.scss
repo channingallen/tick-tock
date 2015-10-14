@@ -89,9 +89,13 @@
   }
 }
 
-
 .entry-form-container__entry-form {
   display: flex;
+}
+
+.entry-form__input {
+  border: 1px solid black;
+  margin-right: 2px;
 }
 
 ////////////////////////
