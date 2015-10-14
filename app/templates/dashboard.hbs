@@ -1,9 +1,13 @@
 <div class="outlet-content-container outlet-content-container--dashboard">
-  <p>Dashboard Content</p>
-  <p>this content is in the dashboard template</p>
+  <h2>Dashboard Content</h2>
   <ul>
     {{#each entries as |entry|}}
-      <li>LOOP!</li>
+      <li>
+        <span>Entry {{entry.id}}: </span>
+        <span>{{entry.time}}</span>
+        <span>{{entry.project}}</span>
+        <span>{{entry.description}}</span>
+      </li>
     {{/each}}
   </ul>
 
