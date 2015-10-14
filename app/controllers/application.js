@@ -8,7 +8,7 @@ export default Ember.Controller.extend({
   unsavedEntryTime: '',
 
   unsavedEntry: Ember.computed(
-  'unsavedEntryTime.length',
+  'unsavedEntryTime',
   'unsavedEntryProject',
   'unsavedEntryDescription',
   function () {
@@ -19,14 +19,27 @@ export default Ember.Controller.extend({
     };
   }),
 
+  _getNewEntryId() {
+    let newId = 1;
+    this.store.peekAll('entry').forEach(function () {
+      newId++;
+    })
+    return newId;
+  },
+
   actions: {
-    handleSubmitEntry(entry) {
-      if (entry.time && entry.project && entry.description ) {
+    handleSubmitEntry() {
+      if (this.get('unsavedEntry.time') && this.get('unsavedEntry.project') && this.get('unsavedEntry.description')) {
         this.store.createRecord('entry', {
-          time: entry.time,
-          project: entry.project,
-          description: entry.description
+          id: this._getNewEntryId(),
+          time: this.get('unsavedEntry.time'),
+          project: this.get('unsavedEntry.project'),
+          description: this.get('unsavedEntry.description')
         });
+
+        this.set('unsavedEntryTime', '');
+        this.set('unsavedEntryProject', '');
+        this.set('unsavedEntryDescription', '');
       } else {
         alert('Fill out all the fields!');
       }

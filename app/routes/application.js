@@ -23,7 +23,7 @@ export default Ember.Route.extend({
       project: 'this project',
       description: 'that description'
     });
-    
+
     this.store.createRecord('entry', {
       id: 4,
       time: 'random time',
