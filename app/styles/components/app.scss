@@ -74,8 +74,24 @@
 //                //
 ////////////////////
 
-.entry-form {
+.entry-form-container {
 
+}
+
+.entry-form-container__nav-buttons {
+  display: flex;
+
+  .nav-buttons__button {
+    margin-right: 5px;
+    min-width: 50px;
+    padding: 2px 8px 2px 8px;
+    white-space: nowrap;
+  }
+}
+
+
+.entry-form-container__entry-form {
+  display: flex;
 }
 
 ////////////////////////
