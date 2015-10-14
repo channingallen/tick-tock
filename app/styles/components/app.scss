@@ -1,0 +1,89 @@
+/////////////////////
+//                 //
+//   Application   //
+//                 //
+/////////////////////
+
+.app {
+  border: 1px dotted gray;
+  display: flex;
+  flex-direction: column;
+}
+
+////////////////
+//            //
+//   Header   //
+//            //
+////////////////
+
+.app-header {
+  border: 1px solid blue;
+}
+
+///////////////////////////////
+//                           //
+//   Application Container   //
+//                           //
+///////////////////////////////
+
+.app-container {
+  border: 1px solid red;
+  display: flex;
+
+}
+
+/////////////////
+//             //
+//   Sidebar   //
+//             //
+/////////////////
+
+.side-bar {
+  border: 2px solid yellow;
+  width: 220px;
+}
+
+.side-bar__item {
+  border: 1px solid black;
+}
+
+.side-bar__dashboard-link {
+
+}
+
+.side-bar__tags-link {
+
+}
+
+
+
+//////////////////////
+//                  //
+//   Main Content   //
+//                  //
+//////////////////////
+
+.app-content {
+  border: 1px solid green;
+  width: 750px;
+}
+
+////////////////////
+//                //
+//   Entry Form   //
+//                //
+////////////////////
+
+.entry-form {
+
+}
+
+////////////////////////
+//                    //
+//   Outlet Content   //
+//                    //
+////////////////////////
+
+.outlet-content-container {
+  border: 1px solid black;
+}

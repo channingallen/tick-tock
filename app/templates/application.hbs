@@ -1,19 +1,32 @@
-<header class="app-header">
-  <h1 id="title" class="app-header__title app-title">Tick Tock</h1>
-</header>
+<div class="app">
+  <header class="app-header">
+    <h1 id="title" class="app-header__title app-title">Tick Tock</h1>
+  </header>
 
-<div class="app-container">
-  <div class="app-sidebar">
+  <div class="app-container">
+    <div class="side-bar">
+      <div class="side-bar__item side-bar__dashboard-link">
+        {{#link-to "dashboard"}}Dashboard{{/link-to}}
+      </div>
 
-  </div>
-
-  <div class="app-content">
-    <div class="entry-form">
-
+      <div class="side-bar__item side-bar__tags-link">
+        {{#link-to "tags"}}Tags{{/link-to}}
+      </div>
     </div>
 
-    <div class="app-outlet">
-      {{outlet}}
+    <div class="app-content">
+      <div class="entry-form">
+        <span>entry form: </span>
+        <form class="" action="index.html" method="post">
+          <input type="button" name="name" value="time">
+          <input type="button" name="name" value="project">
+          <input type="button" name="name" value="description">
+        </form>
+      </div>
+
+      <div class="app-outlet">
+        {{outlet}}
+      </div>
     </div>
   </div>
 </div>

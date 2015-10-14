@@ -1,1 +1,11 @@
-{{outlet}}
+<div class="outlet-content-container outlet-content-container--dashboard">
+  <p>Dashboard Content</p>
+  <p>this content is in the dashboard template</p>
+  <ul>
+    {{#each entries as |entry|}}
+      <li>LOOP!</li>
+    {{/each}}
+  </ul>
+
+  {{outlet}}
+</div>
