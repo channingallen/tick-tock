@@ -5,12 +5,6 @@ export default Ember.Component.extend({
 
   tagName: 'div',
 
-  unsavedEntryDescription: '',
-
-  unsavedEntryProject: '',
-
-  unsavedEntryTime: '',
-
   unsavedEntry: Ember.computed(
     'unsavedEntryTime',
     'unsavedEntryProject',
@@ -23,7 +17,6 @@ export default Ember.Component.extend({
       };
     }
   ),
-
 
   actions: {
     handleSubmitEntry() {
@@ -39,6 +32,10 @@ export default Ember.Component.extend({
       } else {
         alert('Fill out all the fields!');
       }
+    },
+
+    updateTimeValue(translatedTimeValue) {
+      this.set('unsavedEntryTime', translatedTimeValue);
     }
   }
 });

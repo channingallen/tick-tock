@@ -82,6 +82,8 @@
   display: flex;
 
   .nav-buttons__button {
+    background: gray;
+    color: white;
     margin-right: 5px;
     min-width: 50px;
     padding: 2px 8px 2px 8px;
@@ -99,7 +101,7 @@
 }
 
 .entry-fields__submit-button {
-  border: 1px solid blue;
+  border: 2px dotted blue;
 }
 
 ////////////////////////

@@ -9,13 +9,13 @@
     Today
   </li>
   <li class="nav-buttons__button">
-    Calendar
+    <i class="fa fa-calendar"></i> <span>Calendar</span>
   </li>
 </ul>
 
 <div class="entry-form__entry-fields">
   {{entry-form/time-input enter=(action "handleSubmitEntry")
-                          value=unsavedEntryTime}}
+                          timeValue=(action "updateTimeValue")}}
 
   {{entry-form/project-input enter=(action "handleSubmitEntry")
                              value=unsavedEntryProject}}
