@@ -1,4 +1,14 @@
 {{input class="entry-fields__input entry-fields__project-input"
         enter=(action attrs.enter)
+        focus-in=(action "expand")
+        focus-out=(action "collapse")
         placeholder="PROJECT"
         value=attrs.value}}
+
+{{#if expanded}}
+  <ul class="project-input__dropdown">
+    <li>project one</li>
+    <li>project two</li>
+    <li>project three</li>
+  </ul>
+{{/if}}

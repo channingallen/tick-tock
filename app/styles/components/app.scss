@@ -5,9 +5,10 @@
 /////////////////////
 
 .app {
-  border: 1px dotted gray;
   display: flex;
   flex-direction: column;
+  font-size: 16px;
+  padding: 12px;
 }
 
 ////////////////
@@ -17,7 +18,14 @@
 ////////////////
 
 .app-header {
-  border: 1px solid blue;
+  background: $app__color--background;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  padding: 12px;
+}
+
+.app-header__title {
+  color: $app__color--font--light;
 }
 
 ///////////////////////////////
@@ -27,9 +35,7 @@
 ///////////////////////////////
 
 .app-container {
-  border: 1px solid red;
   display: flex;
-
 }
 
 /////////////////
@@ -39,12 +45,13 @@
 /////////////////
 
 .side-bar {
-  border: 2px solid yellow;
-  width: 220px;
+  background: $app__color--secondary;
+  border-radius: 4px;
+  margin-right: 20px;
+  width: 240px;
 }
 
 .side-bar__item {
-  border: 1px solid black;
 }
 
 .side-bar__dashboard-link {
@@ -55,8 +62,6 @@
 
 }
 
-
-
 //////////////////////
 //                  //
 //   Main Content   //
@@ -64,7 +69,6 @@
 //////////////////////
 
 .app-content {
-  border: 1px solid green;
   width: 750px;
 }
 
@@ -75,15 +79,18 @@
 ////////////////////
 
 .entry-form {
-
+  background: $app__color--primary;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 12px;
 }
 
 .entry-form__nav-buttons {
   display: flex;
 
   .nav-buttons__button {
-    background: gray;
-    color: white;
+    background: $app__color--primary--dark;
+    color: $app__color--font--light;
     margin-right: 5px;
     min-width: 50px;
     padding: 2px 8px 2px 8px;
@@ -96,12 +103,19 @@
 }
 
 .entry-fields__input {
-  border: 1px solid black;
+  background: $app__color--background-white;
   margin-right: 2px;
 }
 
+.entry-fields__project-input {
+}
+
+.project-input__dropdown {
+  background: $app__color--primary--light-two;
+  position: absolute;
+}
+
 .entry-fields__submit-button {
-  border: 2px dotted blue;
 }
 
 ////////////////////////
@@ -111,5 +125,4 @@
 ////////////////////////
 
 .outlet-content-container {
-  border: 1px solid black;
 }
