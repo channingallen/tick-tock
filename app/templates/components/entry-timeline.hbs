@@ -1,0 +1,10 @@
+<ul>
+  {{#each entries as |entry|}}
+    <li>
+      <span>Entry {{entry.id}}: </span>
+      <span>{{entry.time}}</span>
+      <span>{{entry.project}}</span>
+      <span>{{entry.description}}</span>
+    </li>
+  {{/each}}
+</ul>
