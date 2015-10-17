@@ -1,0 +1,46 @@
+////////////////////
+//                //
+//   Entry Form   //
+//                //
+////////////////////
+
+.entry-form {
+  background: $app__color--primary;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.entry-form__nav-buttons {
+  display: flex;
+  flex-direction: row;
+
+  .nav-buttons__button {
+    background: $app__color--primary--dark;
+    color: $app__color--font--light;
+    margin-right: 5px;
+    min-width: 50px;
+    padding: 2px 8px 2px 8px;
+    white-space: nowrap;
+  }
+}
+
+.entry-form__entry-fields {
+  display: flex;
+}
+
+.entry-fields__input {
+  background: $app__color--background-white;
+  margin-right: 2px;
+}
+
+.entry-fields__project-input {
+}
+
+.project-input__dropdown {
+  background: $app__color--primary--light-two;
+  position: absolute;
+}
+
+.entry-fields__submit-button {
+}
