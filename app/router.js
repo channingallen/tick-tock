@@ -8,6 +8,7 @@ var Router = Ember.Router.extend({
 Router.map(function() {
   this.route('dashboard', {});
   this.route('tags', {});
+  this.route('projects', {});
 });
 
 export default Router;
