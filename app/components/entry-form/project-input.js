@@ -6,11 +6,17 @@ export default Ember.Component.extend({
   expanded: false,
 
   filteredProjects: Ember.computed(
-    'projects.@each.name',
     'inputValue',
+    'noActionsTaken',
+    'projects.@each.name',
     function () {
       const query = (this.get('inputValue') || '').toLowerCase();
       if (!query) {
+        return this.get('projects');
+      }
+
+      if (this.get('noActionsTaken')) {
+        this.set('noActionsTaken', false);
         return this.get('projects');
       }
 
@@ -40,6 +46,7 @@ export default Ember.Component.extend({
 
     expand() {
       this.set('expanded', true);
+      this.set('noActionsTaken', true);
 
       if (this.attrs.expand) {
         this.attrs.expand();
