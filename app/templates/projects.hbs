@@ -1,5 +1,10 @@
 <div class="outlet-content-container outlet-content-container--projects">
   <h2>Projects Content</h2>
+  <ul>
+    {{#each projects as |project|}}
+      <li>{{project.name}}</li>
+    {{/each}}
 
-  {{outlet}}
+    {{outlet}}
+  </ul>
 </div>

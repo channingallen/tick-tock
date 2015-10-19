@@ -17,8 +17,10 @@
   {{entry-form/time-input enter=(action "handleSubmitEntry")
                           timeValue=(action "updateTimeValue")}}
 
-  {{entry-form/project-input enter=(action "handleSubmitEntry")
-                             value=unsavedEntryProject}}
+  {{entry-form/project-input select=(action "focusOnDescriptionInput")
+                             enter=(action "handleSubmitEntry")
+                             projects=(readonly attrs.projects)
+                             value=(action "updateProjectValue")}}
 
   {{entry-form/description-input enter=(action "handleSubmitEntry")
                                  value=unsavedEntryDescription}}

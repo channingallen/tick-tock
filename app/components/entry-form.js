@@ -19,6 +19,10 @@ export default Ember.Component.extend({
   ),
 
   actions: {
+    focusOnDescriptionInput() {
+      this.$('.entry-fields__description-input').focus();
+    },
+
     handleSubmitEntry() {
       if (this.get('unsavedEntry.time') &&
           this.get('unsavedEntry.project') &&
@@ -36,6 +40,10 @@ export default Ember.Component.extend({
 
     updateTimeValue(translatedTimeValue) {
       this.set('unsavedEntryTime', translatedTimeValue);
+    },
+
+    updateProjectValue(projectValue) {
+      this.set('unsavedEntryProject', projectValue);
     }
   }
 });

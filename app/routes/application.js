@@ -13,12 +13,22 @@ export default Ember.Route.extend({
   },
 
   model() {
-    return this.store.filter('entry', function () {
+    const entryFilterObject = this.store.filter('entry', function () {
       return true;
     });
+
+    const projectFilterObject = this.store.filter('project', function () {
+      return true;
+    });
+
+    return {
+      entryFilterObject: entryFilterObject,
+      projectFilterObject: projectFilterObject
+    };
   },
 
   setupController(controller, model) {
-    controller.set('entries', model);
+    controller.set('entries', model.entryFilterObject);
+    controller.set('projects', model.projectFilterObject);
   }
 });
