@@ -55,6 +55,10 @@ export default Ember.Component.extend({
 
     updateInputValue(inputValue) {
       this.set('inputValue', inputValue);
+
+      if (this.attrs.type) {
+        this.attrs.type(inputValue);
+      }
     }
   }
 });

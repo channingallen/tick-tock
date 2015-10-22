@@ -15,12 +15,12 @@
 
 <div class="entry-form__entry-fields">
   {{entry-form/time-input enter=(action "handleSubmitEntry")
-                          timeValue=(action "updateTimeValue")}}
+                          type=(action "updateTimeValue")}}
 
-  {{entry-form/project-input select=(action "focusOnDescriptionInput")
-                             enter=(action "handleSubmitEntry")
+  {{entry-form/project-input enter=(action "handleSubmitEntry")
                              projects=(readonly attrs.projects)
-                             value=(action "updateProjectValue")}}
+                             select=(action "focusOnDescriptionInput")
+                             type=(action "updateProjectValue")}}
 
   {{entry-form/description-input enter=(action "handleSubmitEntry")
                                  value=unsavedEntryDescription}}
