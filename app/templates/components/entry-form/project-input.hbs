@@ -2,14 +2,24 @@
         enter=(action attrs.enter)
         focus-in=(action "expand")
         focus-out=(action "collapse")
-        key-up=(action "updateInputValue")
+        key-up=(action "handleKeyUp")
         placeholder="PROJECT"
         value=(readonly selectedProject.name)}}
 
 {{#if expanded}}
   <ul class="project-input__dropdown">
-    {{#each filteredProjects as |project|}}
-      <li onmousedown={{action (action "selectProject" project)}}>{{project.name}}</li>
+    {{#each projectOptions as |option|}}
+      {{#if option.active}}
+        <li class="dropdown__project--active"
+            onmousedown={{action (action "selectProject" option.project)}}>
+          {{option.project.name}}
+        </li>
+      {{else}}
+        <li class="dropdown__project"
+            onmousedown={{action (action "selectProject" option.project)}}>
+          {{option.project.name}}
+        </li>
+      {{/if}}
     {{/each}}
   </ul>
 {{/if}}
