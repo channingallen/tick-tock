@@ -17,7 +17,8 @@
   {{entry-form/time-input enter=(action "handleSubmitEntry")
                           type=(action "updateTimeValue")}}
 
-  {{entry-form/project-input enter=(action "handleSubmitEntry")
+  {{entry-form/project-input class="entry-fields__project-input"
+                             enter=(action "handleSubmitEntry")
                              projects=(readonly attrs.projects)
                              select=(action "focusOnDescriptionInput")
                              type=(action "updateProjectValue")}}

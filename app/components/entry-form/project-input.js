@@ -1,98 +1,115 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  activeProjectIndex: null,
-
-  classNames: ['entry-fields__project-input'],
-
-  _decrementActiveIndex() {
-    let currentActiveProjectIndex = this.get('activeProjectIndex');
-    let numProjectOptions = this.get('numProjectOptions');
-
-    if (currentActiveProjectIndex > 0) {
-      this.set('activeProjectIndex', currentActiveProjectIndex - 1);
-    } else {
-      this.set('activeProjectIndex', numProjectOptions - 1);
-    }
-  },
+  classNames: ['project-input'],
 
   expanded: false,
 
-  _incrementActiveIndex() {
-    let currentActiveProjectIndex = this.get('activeProjectIndex');
-    let numProjectOptions = this.get('numProjectOptions');
+  _getHighlightedOption() {
+    return this.get('visibleOptions').find(option => {
+      return !!option.get('highlight');
+    });
+  },
 
-    if ((currentActiveProjectIndex + 1) < numProjectOptions) {
-      this.set('activeProjectIndex', currentActiveProjectIndex + 1);
-    } else {
-      this.set('activeProjectIndex', 0);
+  _moveHighlightDown() {
+    if (!this.get('visibleOptions.length')) {
+      return;
+    }
+
+    const highlightedOption = this._getHighlightedOption();
+    const highlightedIndex = this.get('visibleOptions').indexOf(highlightedOption);
+    const highlightedOptionIsLast = highlightedIndex === this.get('visibleOptions.length') - 1;
+    if (highlightedOption && !highlightedOptionIsLast) {
+      highlightedOption.set('highlight', false);
+
+      const nextOption = this.get('visibleOptions').objectAt(highlightedIndex + 1);
+      nextOption.set('highlight', true);
+    } else if (!highlightedOption) {
+      this.set('visibleOptions.firstObject.highlight', true);
     }
   },
 
-  noActionsTaken: true,
+  _moveHighlightUp() {
+    if (!this.get('visibleOptions.length')) {
+      return;
+    }
 
-  noNewOptionSelected: true,
+    const highlightedOption = this._getHighlightedOption();
+    const highlightedIndex = this.get('visibleOptions').indexOf(highlightedOption);
+    const highlightedOptionIsFirst = highlightedIndex === 0;
+    if (highlightedOption && !highlightedOptionIsFirst) {
+      highlightedOption.set('highlight', false);
 
-  numProjectOptions: null,
+      const previousOption = this.get('visibleOptions').objectAt(highlightedIndex - 1);
+      previousOption.set('highlight', true);
+    } else if (!highlightedOption) {
+      this.set('visibleOptions.firstObject.highlight', true);
+    }
+  },
 
-  projectOptions: Ember.computed(
-    'noActionsTaken',
-    'activeProjectIndex',
-    'inputValue',
-    'projects.@each.name',
+  _optionMatchesInputValue(option) {
+    const inputValue = this.get('inputValue').toLowerCase();
+    const projectName = option.get('project.name').toLowerCase();
+    return projectName.indexOf(inputValue) !== -1;
+  },
+
+  _resetOptions() {
+    // Note: This will automatically highlight the first option via
+    // `_highlightFirstOption`, because it watches the `visibleOptions` and we
+    // are changing that here.
+    this.get('projectOptions').forEach((option) => {
+      option.set('visible', true);
+    });
+  },
+
+  _selectHighlightedProject() {
+    const highlightedOption = this._getHighlightedOption();
+    const project = highlightedOption.get('project');
+    this._selectProject(project);
+  },
+
+  _selectProject(project) {
+    this.set('selectedProject', project);
+
+    if (this.attrs.select) {
+      this.attrs.select(project);
+    }
+  },
+
+  _highlightFirstOption: Ember.observer(
+    'expanded',
+    'visibleOptions.[]',
     function () {
-      // Define the new project options array
-      const projectOptions = [];
-      this.get('projects').forEach((project) => {
-        const option = Ember.Object.create({
-          active: false,
-          project: project
-        });
-        projectOptions.push(option);
+      this.get('visibleOptions').forEach((option, index) => {
+        option.set('highlight', index === 0);
       });
-      this.set('numProjectOptions', projectOptions.length);
-
-      // Return the array with the first item active in the first construction
-      if (this.get('noActionsTaken')) {
-        projectOptions.objectAt(0).set('active', true);
-        this.set('activeProjectIndex', 0);
-        return projectOptions;
-      }
-
-      const query = (this.get('inputValue') || '').toLowerCase();
-      if (!query && this.get('noNewOptionSelected')) {
-        projectOptions.objectAt(0).set('active', true);
-        this.set('activeProjectIndex', 0);
-        return projectOptions;
-      }
-
-      if (!query) {
-        const newActiveProjectIndex = this.get('activeProjectIndex');
-        projectOptions.objectAt(newActiveProjectIndex).set('active', true);
-        return projectOptions;
-      }
-
-      const filteredProjectOptions = projectOptions.filter((option) => {
-        const projectName = option.get('project.name').toLowerCase();
-        return projectName.indexOf(query) !== -1;
-      });
-      this.set('numProjectOptions', filteredProjectOptions.length);
-
-      if (!this.get('numProjectOptions')) {
-        return filteredProjectOptions;
-      }
-
-      if (this.get('noNewOptionSelected')) {
-        filteredProjectOptions.objectAt(0).set('active', true);
-        this.set('activeProjectIndex', 0);
-      } else {
-        const newActiveProjectIndex = this.get('activeProjectIndex');
-        filteredProjectOptions.objectAt(newActiveProjectIndex).set('active', true);
-      }
-
-      return filteredProjectOptions;
     }
   ),
+
+  _filterOptionsByQuery: Ember.observer('inputValue', function () {
+    this.get('projectOptions').forEach((option) => {
+      option.set('visible', this._optionMatchesInputValue(option));
+    });
+  }),
+
+  _maintainInputValue: Ember.observer('selectedProject.name', function () {
+    this.set('inputValue', this.get('selectedProject.name'));
+  }),
+
+  // TODO THIS COMMIT: make new function for filtering options by input values
+  projectOptions: Ember.computed('projects.[]', function () {
+    return this.get('projects').map((project) => {
+      return Ember.Object.create({
+        highlight: false,
+        project: project,
+        visible: true
+      });
+    });
+  }),
+
+  visibleOptions: Ember.computed('projectOptions.@each.visible', function () {
+    return this.get('projectOptions').filterBy('visible');
+  }),
 
   actions: {
     collapse() {
@@ -104,51 +121,54 @@ export default Ember.Component.extend({
     },
 
     selectProject(project) {
-      this.set('selectedProject', project);
-
-      if (this.attrs.select) {
-        this.attrs.select(project);
-      }
+      this._selectProject(project);
     },
 
     expand() {
       this.set('expanded', true);
-      this.set('noActionsTaken', true);
-      this.set('noNewOptionSelected', true);
+
+      this._resetOptions();
 
       if (this.attrs.expand) {
         this.attrs.expand();
       }
     },
 
+    handleEnter() {
+      if (this.attrs.enter) {
+        if (!this.get('expanded')) {
+          this.attrs.enter();
+        }
+      }
+
+      this._selectHighlightedProject();
+    },
+
+    handleKeyDown(inputValue, event) {
+      if (event.which === 38 || event.which === 40) {
+        event.preventDefault();
+      }
+
+      // Decrement the highlight index when up is pressed.
+      if (event.which === 38) {
+        this._moveHighlightUp();
+      }
+
+      // Increment the highlight index when down is pressed.
+      if (event.which === 40) {
+        this._moveHighlightDown();
+      }
+    },
+
     handleKeyUp(inputValue, event) {
-      this.set('inputValue', inputValue);
-
-      // report actions have been taken unless "tabbing in" with tab or shift
-      if (event.keyCode !== 9 && event.keyCode !== 16) { // 9/16 === tab/shift
-        this.set('noActionsTaken', false);
-      }
-
-      // report new options have been selected when up or down are pressed
-      if (event.keyCode === 38 || event.keyCode === 40) { // 38/40 === up/down
-        this.set('noNewOptionSelected', false);
-      }
-
-      // decrement the active index when up is pressed
-      if (event.keyCode === 38) {
-        this._decrementActiveIndex();
-      }
-
-      // increment the active index when down is pressed
-      if (event.keyCode === 40) {
-        this._incrementActiveIndex();
+      const originalInputValue = this.get('inputValue');
+      if (inputValue !== originalInputValue  && event.which !== 13) {
+        this.set('inputValue', inputValue);
       }
 
       if (this.attrs.type) {
         this.attrs.type(inputValue);
       }
-
-      console.log(event.keyCode); // TODO THIS COMMIT: remove keyCode logging
     }
   }
 });

@@ -28,7 +28,9 @@ export default Ember.Component.extend({
           this.get('unsavedEntry.project') &&
           this.get('unsavedEntry.description')) {
 
-        this.attrs.submit(this.get('unsavedEntry'));
+        if (this.attrs.submit) {
+          this.attrs.submit(this.get('unsavedEntry'));
+        }
 
         this.set('unsavedEntryTime', '');
         this.set('unsavedEntryProject', '');

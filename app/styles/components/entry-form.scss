@@ -37,7 +37,7 @@
 .entry-fields__project-input {
 }
 
-.project-input__dropdown {
+.project-input__options {
   background: $app__color--primary--light-two;
   position: absolute;
 }
@@ -45,6 +45,6 @@
 .entry-fields__submit-button {
 }
 
-.dropdown__project--active {
-  border: 1px solid yellow;
+.project-input__option--highlight {
+  background-color: yellow;
 }
