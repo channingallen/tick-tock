@@ -20,7 +20,8 @@
 
     <div class="app-content">
       {{entry-form projects=projects
-                   submit=(action "handleSubmitEntry")}}
+                   submit=(action "handleSubmitEntry")
+                   tags=tags}}
 
       <div class="app-outlet">
         {{outlet}}

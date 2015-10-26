@@ -23,7 +23,8 @@
                              select=(action "focusOnDescriptionInput")
                              type=(action "updateProjectValue")}}
 
-  {{entry-form/description-input enter=(action "handleSubmitEntry")}}
+  {{entry-form/description-input enter=(action "handleSubmitEntry")
+                                 tags=(readonly attrs.tags)}}
 
   {{entry-form/submit-button on-click=(action "handleSubmitEntry")}}
 </div>

@@ -10,6 +10,15 @@ export default Ember.Route.extend({
     this.store.createRecord('project', {id: 1, name: 'Tick Tock', entries: []});
     this.store.createRecord('project', {id: 2, name: 'Handle', entries: []});
     this.store.createRecord('project', {id: 3, name: 'The River Six', entries: []});
+    this.store.createRecord('tag', {id: 1, name: '#firsttag'});
+    this.store.createRecord('tag', {id: 2, name: '#writing'});
+    this.store.createRecord('tag', {id: 3, name: '#famous'});
+    this.store.createRecord('tag', {id: 4, name: '#hardwork'});
+    this.store.createRecord('tag', {id: 5, name: '#coding'});
+    this.store.createRecord('tag', {id: 6, name: '#emberJS'});
+    this.store.createRecord('tag', {id: 7, name: '#1'});
+    this.store.createRecord('tag', {id: 8, name: '#specialchar%'});
+    this.store.createRecord('tag', {id: 9, name: '#thisplusthat'});
   },
 
   model() {
@@ -21,14 +30,20 @@ export default Ember.Route.extend({
       return true;
     });
 
+    const tagFilterObject = this.store.filter('tag', function () {
+      return true;
+    });
+
     return {
       entryFilterObject: entryFilterObject,
-      projectFilterObject: projectFilterObject
+      projectFilterObject: projectFilterObject,
+      tagFilterObject: tagFilterObject
     };
   },
 
   setupController(controller, model) {
     controller.set('entries', model.entryFilterObject);
     controller.set('projects', model.projectFilterObject);
+    controller.set('tags', model.tagFilterObject);
   }
 });

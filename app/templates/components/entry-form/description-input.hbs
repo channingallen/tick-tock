@@ -7,13 +7,9 @@
 {{#if expanded}}
   <div class="description-input__options">
     <ul>
-      <li class="tag-options__tag">#tagone</li>
-      <li class="tag-options__tag">#tagtwo</li>
-      <li class="tag-options__tag">#tagthree</li>
-      <li class="tag-options__tag">#tagfour</li>
-      <li class="tag-options__tag">#tagfive</li>
-      <li class="tag-options__tag">#tagsix</li>
-      <li class="tag-options__tag">#tagseven</li>
+      {{#each tags as |tag|}}
+        <li class="tag-options__tag">{{tag.name}}</li>
+      {{/each}}
     </ul>
   </div>
 {{/if}}
