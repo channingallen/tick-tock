@@ -1,9 +1,15 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  expanded: false,
+
   actions: {
-    submitNewEntry() {
-      alert('submitted entry!');
+    collapse() {
+      this.set('expanded', false);
+    },
+
+    expand() {
+      this.set('expanded', true);
     }
   }
 });

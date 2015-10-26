@@ -1,4 +1,19 @@
 {{input class="entry-fields__input entry-fields__description-input"
         enter=(action attrs.enter)
-        placeholder="DESCRIPTION"
-        value=attrs.value}}
+        focus-in=(action "expand")
+        focus-out=(action "collapse")
+        placeholder="DESCRIPTION"}}
+
+{{#if expanded}}
+  <div class="description-input__options">
+    <ul>
+      <li class="tag-options__tag">#tagone</li>
+      <li class="tag-options__tag">#tagtwo</li>
+      <li class="tag-options__tag">#tagthree</li>
+      <li class="tag-options__tag">#tagfour</li>
+      <li class="tag-options__tag">#tagfive</li>
+      <li class="tag-options__tag">#tagsix</li>
+      <li class="tag-options__tag">#tagseven</li>
+    </ul>
+  </div>
+{{/if}}

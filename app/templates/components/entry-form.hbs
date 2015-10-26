@@ -23,8 +23,7 @@
                              select=(action "focusOnDescriptionInput")
                              type=(action "updateProjectValue")}}
 
-  {{entry-form/description-input enter=(action "handleSubmitEntry")
-                                 value=unsavedEntryDescription}}
+  {{entry-form/description-input enter=(action "handleSubmitEntry")}}
 
   {{entry-form/submit-button on-click=(action "handleSubmitEntry")}}
 </div>
