@@ -145,6 +145,10 @@ export default Ember.Component.extend({
     },
 
     handleKeyDown(inputValue, event) {
+      if (event.which === 27) {
+        this.set('expanded', !this.get('expanded'));
+      }
+
       if (event.which === 38 || event.which === 40) {
         event.preventDefault();
       }
