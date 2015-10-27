@@ -21,6 +21,13 @@ export default Ember.Component.extend({
 
   optionWarningPresent: false,
 
+  _cursorWordHasProperChars(cursorWord) {
+    const cursorWordSansTag = cursorWord.substr(1, cursorWord.length - 1);
+    const curatedWord = cursorWordSansTag.replace(/[^\w\s]/gi, '');
+
+    return cursorWordSansTag === curatedWord;
+  },
+
   _getCursorWord() {
     if (!this.get('inputValue')) {
       return;
@@ -77,6 +84,8 @@ export default Ember.Component.extend({
     return cursorWord;
   },
 
+  // match indiscriminately if: (1) no word found (2) word not a tag, (3) "word
+  //                            body" contains special characters
   _optionMatchesCursorWord(option) {
     const cursorWord = this._getCursorWord();
     const tagName = option.get('tag.name').toLowerCase();
@@ -90,11 +99,11 @@ export default Ember.Component.extend({
       return true;
     }
 
-    if (cursorWord.charAt(0) === '#' && cursorWord.length === 1) {
+    if (cursorWord.charAt(0) !== '#') {
       return true;
     }
 
-    if (cursorWord.charAt(0) !== '#') {
+    if (!this._cursorWordHasProperChars(cursorWord)) {
       return true;
     }
 
