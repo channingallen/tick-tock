@@ -4,7 +4,19 @@
   position: absolute;
 }
 
-.description-input__options .tag-options__tag {
+.options__tag {
   background-color: yellow;
   display: inline-block;
+}
+
+.options__hotkey-suggestions {
+  color: blue;
+  font-style: italic;
+  margin-top: 15px;
+}
+
+.options__input-warning {
+  color: blue;
+  font-style: italic;
+  margin-top: 15px;
 }

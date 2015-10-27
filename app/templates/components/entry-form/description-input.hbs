@@ -1,15 +1,31 @@
 {{input class="entry-fields__input entry-fields__description-input"
+        click=(action "handleClick")
         enter=(action attrs.enter)
         focus-in=(action "expand")
         focus-out=(action "collapse")
+        key-up=(action "handleKeyUp")
         placeholder="DESCRIPTION"}}
 
 {{#if expanded}}
   <div class="description-input__options">
-    <ul>
-      {{#each tags as |tag|}}
-        <li class="tag-options__tag">{{tag.name}}</li>
+    <ul class="options__tag-list">
+      {{#each tagOptions as |option|}}
+        {{#if option.visible}}
+          <li class="options__tag">{{option.tag.name}}</li>
+        {{/if}}
       {{/each}}
     </ul>
+
+    {{#if statusPresent}}
+      <p class="options__status">{{optionStatus}}</p>
+    {{/if}}
+
+    {{#if warningPresent}}
+      <p class="options__warning">{{warningText}}</p>
+    {{/if}}
+
+    {{#if hotkeyHintsPresent}}
+      <p class="options__hotkey-hints">{{hotkeyHint}}</p>
+    {{/if}}
   </div>
 {{/if}}
