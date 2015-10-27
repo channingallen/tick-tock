@@ -81,6 +81,10 @@ export default Ember.Component.extend({
     const cursorWord = this._getCursorWord();
     const tagName = option.get('tag.name').toLowerCase();
 
+    if (!cursorWord) {
+      return true;
+    }
+
     if (cursorWord === '#') {
       this.set('optionHotkeyHint', '[Tab] cycle through tag completions');
       return true;
