@@ -65,8 +65,10 @@ export default Ember.Component.extend({
 
   _selectHighlightedProject() {
     const highlightedOption = this._getHighlightedOption();
-    const project = highlightedOption.get('project');
-    this._selectProject(project);
+    if (highlightedOption) {
+      const project = highlightedOption.get('project');
+      this._selectProject(project);
+    }
   },
 
   _selectProject(project) {
@@ -99,6 +101,7 @@ export default Ember.Component.extend({
 
   _reset: Ember.observer('attrs.reset', function () {
     this.set('selectedProject', null);
+    this.notifyPropertyChange('selectedProject');
   }),
 
   // TODO THIS COMMIT: make new function for filtering options by input values
