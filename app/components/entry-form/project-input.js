@@ -104,7 +104,19 @@ export default Ember.Component.extend({
     this.notifyPropertyChange('selectedProject');
   }),
 
-  // TODO THIS COMMIT: make new function for filtering options by input values
+  // projectOptions array:
+  // [
+  //   option object:
+  //   {
+  //     highlight: bool,
+  //     project: {
+  //       id: num,
+  //       name: str,
+  //       entries: arr
+  //     },
+  //     visible: bool
+  //   }
+  // ]
   projectOptions: Ember.computed('projects.[]', function () {
     return this.get('projects').map((project) => {
       return Ember.Object.create({
@@ -150,6 +162,10 @@ export default Ember.Component.extend({
       }
 
       this._selectHighlightedProject();
+
+      if (this.attrs['key-up']) {
+        this.attrs['key-up'](this.get('inputValue'));
+      }
     },
 
     handleKeyDown(inputValue, event) {
@@ -173,6 +189,10 @@ export default Ember.Component.extend({
     },
 
     handleKeyUp(inputValue, event) {
+      if (event.which === 13) {
+        return;
+      }
+
       const originalInputValue = this.get('inputValue');
       if (inputValue !== originalInputValue  && event.which !== 13) {
         this.set('inputValue', inputValue);
