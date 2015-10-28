@@ -1,6 +1,6 @@
 {{input class="entry-fields__input entry-fields__time-input"
         enter=(action attrs.enter)
         focusOnInsert=true
-        focus-out=(action "handleValueTranslation")
+        key-up=(action "handleKeyUp")
         placeholder="TIME"
-        value=(readonly rawInputValue)}}
+        value=(readonly inputValue)}}

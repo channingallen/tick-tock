@@ -15,15 +15,19 @@
 
 <div class="entry-form__entry-fields">
   {{entry-form/time-input enter=(action "handleSubmitEntry")
-                          type=(action "updateTimeValue")}}
+                          key-up=(action "updateTimeValue")
+                          reset=(readonly reset)}}
 
   {{entry-form/project-input class="entry-fields__project-input"
                              enter=(action "handleSubmitEntry")
+                             key-up=(action "updateProjectValue")
                              projects=(readonly attrs.projects)
-                             select=(action "focusOnDescriptionInput")
-                             type=(action "updateProjectValue")}}
+                             reset=(readonly reset)
+                             select=(action "focusOnDescriptionInput")}}
 
   {{entry-form/description-input enter=(action "handleSubmitEntry")
+                                 key-up=(action "updateDescriptionValue")
+                                 reset=(readonly reset)
                                  tags=(readonly attrs.tags)}}
 
   {{entry-form/submit-button on-click=(action "handleSubmitEntry")}}

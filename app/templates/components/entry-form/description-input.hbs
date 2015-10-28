@@ -1,10 +1,11 @@
 {{input class="entry-fields__input entry-fields__description-input"
         click=(action "handleClick")
-        enter=(action attrs.enter)
+        enter=(action "submit")
         focus-in=(action "expand")
         focus-out=(action "collapse")
         key-up=(action "handleKeyUp")
-        placeholder="DESCRIPTION"}}
+        placeholder="DESCRIPTION"
+        value=(readonly inputValue)}}
 
 {{#if expanded}}
   <div class="description-input__options">

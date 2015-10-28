@@ -120,6 +120,11 @@ export default Ember.Component.extend({
     }
   ),
 
+  _reset: Ember.observer('attrs.reset', function () {
+    this.set('inputValue', '');
+    this.set('cursorWord', '');
+  }),
+
   tagOptions: Ember.computed('tags.[]', function () {
     return this.get('tags').map((tag) => {
       return Ember.Object.create({
@@ -159,8 +164,14 @@ export default Ember.Component.extend({
 
       this.set('inputValue', inputValue);
 
-      if (this.attrs.type) {
-        this.attrs.type(inputValue);
+      if (this.attrs['key-up']) {
+        this.attrs['key-up'](inputValue);
+      }
+    },
+
+    submit() {
+      if (this.attrs.enter) {
+        this.attrs.enter();
       }
     }
   }

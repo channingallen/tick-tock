@@ -3,7 +3,18 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames: ['entry-form'],
 
+  // Increment this number to reset the values on the child input fields.
+  reset: 1,
+
   tagName: 'div',
+
+  _reset() {
+    this.set('unsavedEntryTime', '');
+    this.set('unsavedEntryProject', '');
+    this.set('unsavedEntryDescription', '');
+
+    this.incrementProperty('reset');
+  },
 
   unsavedEntry: Ember.computed(
     'unsavedEntryTime',
@@ -24,28 +35,30 @@ export default Ember.Component.extend({
     },
 
     handleSubmitEntry() {
-      if (this.get('unsavedEntry.time') &&
-          this.get('unsavedEntry.project') &&
-          this.get('unsavedEntry.description')) {
-
-        if (this.attrs.submit) {
-          this.attrs.submit(this.get('unsavedEntry'));
-        }
-
-        this.set('unsavedEntryTime', '');
-        this.set('unsavedEntryProject', '');
-        this.set('unsavedEntryDescription', '');
-      } else {
+      if (!this.get('unsavedEntry.time') ||
+          !this.get('unsavedEntry.project') ||
+          !this.get('unsavedEntry.description')) {
         alert('Fill out all the fields!');
+        return;
       }
+
+      if (this.attrs.submit) {
+        this.attrs.submit(this.get('unsavedEntry'));
+      }
+
+      this._reset();
     },
 
-    updateTimeValue(translatedTimeValue) {
-      this.set('unsavedEntryTime', translatedTimeValue);
+    updateDescriptionValue(inputValue) {
+      this.set('unsavedEntryDescription', inputValue);
     },
 
-    updateProjectValue(projectValue) {
-      this.set('unsavedEntryProject', projectValue);
+    updateTimeValue(inputValue) {
+      this.set('unsavedEntryTime', inputValue);
+    },
+
+    updateProjectValue(inputValue) {
+      this.set('unsavedEntryProject', inputValue);
     }
   }
 });

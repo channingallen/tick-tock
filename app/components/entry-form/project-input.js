@@ -17,12 +17,13 @@ export default Ember.Component.extend({
     }
 
     const highlightedOption = this._getHighlightedOption();
-    const highlightedIndex = this.get('visibleOptions').indexOf(highlightedOption);
-    const highlightedOptionIsLast = highlightedIndex === this.get('visibleOptions.length') - 1;
+    const visOptions = this.get('visibleOptions');
+    const highlightedIndex = visOptions.indexOf(highlightedOption);
+    const highlightedOptionIsLast = highlightedIndex === visOptions.length - 1;
     if (highlightedOption && !highlightedOptionIsLast) {
       highlightedOption.set('highlight', false);
 
-      const nextOption = this.get('visibleOptions').objectAt(highlightedIndex + 1);
+      const nextOption = visOptions.objectAt(highlightedIndex + 1);
       nextOption.set('highlight', true);
     } else if (!highlightedOption) {
       this.set('visibleOptions.firstObject.highlight', true);
@@ -48,7 +49,7 @@ export default Ember.Component.extend({
   },
 
   _optionMatchesInputValue(option) {
-    const inputValue = this.get('inputValue').toLowerCase();
+    const inputValue = (this.get('inputValue') || '').toLowerCase();
     const projectName = option.get('project.name').toLowerCase();
     return projectName.indexOf(inputValue) !== -1;
   },
@@ -94,6 +95,10 @@ export default Ember.Component.extend({
 
   _maintainInputValue: Ember.observer('selectedProject.name', function () {
     this.set('inputValue', this.get('selectedProject.name'));
+  }),
+
+  _reset: Ember.observer('attrs.reset', function () {
+    this.set('selectedProject', null);
   }),
 
   // TODO THIS COMMIT: make new function for filtering options by input values
@@ -170,8 +175,8 @@ export default Ember.Component.extend({
         this.set('inputValue', inputValue);
       }
 
-      if (this.attrs.type) {
-        this.attrs.type(inputValue);
+      if (this.attrs['key-up']) {
+        this.attrs['key-up'](inputValue);
       }
     }
   }
