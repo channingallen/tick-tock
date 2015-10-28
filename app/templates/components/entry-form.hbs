@@ -1,32 +1,19 @@
-<ul class="entry-form__nav-buttons">
-  <li class="nav-buttons__button">
-    2D-ago
-  </li>
-  <li class="nav-buttons__button">
-    Yesterday
-  </li>
-  <li class="nav-buttons__button">
-    Today
-  </li>
-  <li class="nav-buttons__button">
-    <i class="fa fa-calendar"></i> <span>Calendar</span>
-  </li>
-</ul>
+{{entry-form/nav-buttons click=(action "updateEntryDate")}}
 
 <div class="entry-form__entry-fields">
   {{entry-form/time-input enter=(action "handleSubmitEntry")
-                          key-up=(action "updateTimeValue")
+                          key-up=(action "updateEntryTime")
                           reset=(readonly reset)}}
 
   {{entry-form/project-input class="entry-fields__project-input"
                              enter=(action "handleSubmitEntry")
-                             key-up=(action "updateProjectValue")
+                             key-up=(action "updateEntryProject")
                              projects=(readonly attrs.projects)
                              reset=(readonly reset)
                              select=(action "focusOnDescriptionInput")}}
 
   {{entry-form/description-input enter=(action "handleSubmitEntry")
-                                 key-up=(action "updateDescriptionValue")
+                                 key-up=(action "updateEntryDescription")
                                  reset=(readonly reset)
                                  tags=(readonly attrs.tags)}}
 

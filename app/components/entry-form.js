@@ -9,22 +9,25 @@ export default Ember.Component.extend({
   tagName: 'div',
 
   _reset() {
-    this.set('unsavedEntryTime', '');
-    this.set('unsavedEntryProject', '');
+    this.set('unsavedEntryDate', '');
     this.set('unsavedEntryDescription', '');
+    this.set('unsavedEntryProject', '');
+    this.set('unsavedEntryTime', '');
 
     this.incrementProperty('reset');
   },
 
   unsavedEntry: Ember.computed(
-    'unsavedEntryTime',
-    'unsavedEntryProject',
+    'unsavedEntryDate',
     'unsavedEntryDescription',
+    'unsavedEntryProject',
+    'unsavedEntryTime',
     function () {
       return {
-        time: this.get('unsavedEntryTime'),
+        date: this.get('unsavedEntryDate'),
+        description: this.get('unsavedEntryDescription'),
         project: this.get('unsavedEntryProject'),
-        description: this.get('unsavedEntryDescription')
+        time: this.get('unsavedEntryTime')
       };
     }
   ),
@@ -37,7 +40,8 @@ export default Ember.Component.extend({
     handleSubmitEntry() {
       if (!this.get('unsavedEntry.time') ||
           !this.get('unsavedEntry.project') ||
-          !this.get('unsavedEntry.description')) {
+          !this.get('unsavedEntry.description') ||
+          !this.get('unsavedEntry.date')) {
         alert('Fill out all the fields!');
         return;
       }
@@ -49,15 +53,19 @@ export default Ember.Component.extend({
       this._reset();
     },
 
-    updateDescriptionValue(inputValue) {
+    updateEntryDate(inputValue) {
+      this.set('unsavedEntryDate', inputValue);
+    },
+
+    updateEntryDescription(inputValue) {
       this.set('unsavedEntryDescription', inputValue);
     },
 
-    updateTimeValue(inputValue) {
+    updateEntryTime(inputValue) {
       this.set('unsavedEntryTime', inputValue);
     },
 
-    updateProjectValue(inputValue) {
+    updateEntryProject(inputValue) {
       this.set('unsavedEntryProject', inputValue);
     }
   }
