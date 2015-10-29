@@ -1,14 +1,12 @@
 <ul class="entry-form__nav-buttons">
-  <li class="nav-buttons__button">
-    2D-ago
-  </li>
-  <li class="nav-buttons__button">
-    Yesterday
-  </li>
-  <li class="nav-buttons__button">
-    Today
-  </li>
-  <li class="nav-buttons__button">
-    <i class="fa fa-calendar"></i> <span>Calendar</span>
-  </li>
+  {{#each liveItems as |navItem|}}
+    <li class="nav-buttons__button
+               {{if navItem.active "nav-buttons__button--active"}}"
+        onclick={{action "selectTab" navItem.title}}>
+      {{#if navItem.icon}}
+        <i class="fa fa-{{navItem.icon}}"></i>
+      {{/if}}
+      <span>{{navItem.title}}</span>
+    </li>
+  {{/each}}
 </ul>

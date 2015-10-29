@@ -14,15 +14,19 @@
 .entry-form__nav-buttons {
   display: flex;
   flex-direction: row;
+}
 
-  .nav-buttons__button {
-    background: $app__color--primary--dark;
-    color: $app__color--font--light;
-    margin-right: 5px;
-    min-width: 50px;
-    padding: 2px 8px 2px 8px;
-    white-space: nowrap;
-  }
+.nav-buttons__button {
+  background: $app__color--primary--dark;
+  color: $app__color--font--light;
+  margin-right: 5px;
+  min-width: 50px;
+  padding: 2px 8px 2px 8px;
+  white-space: nowrap;
+}
+
+.nav-buttons__button--active {
+  background-color: $app__color--primary--light-one;
 }
 
 .entry-form__entry-fields {
@@ -32,7 +36,4 @@
 .entry-fields__input {
   background: $app__color--background-white;
   margin-right: 2px;
-}
-
-.entry-fields__submit-button {
 }

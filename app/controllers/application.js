@@ -14,6 +14,7 @@ export default Ember.Controller.extend({
       if (entry) {
         this.store.createRecord('entry', {
           id: this._getNewEntryId(),
+          date: entry.date,
           time: entry.time,
           project: entry.project,
           description: entry.description

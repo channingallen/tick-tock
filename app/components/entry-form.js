@@ -53,8 +53,10 @@ export default Ember.Component.extend({
       this._reset();
     },
 
-    updateEntryDate(inputValue) {
-      this.set('unsavedEntryDate', inputValue);
+    updateEntryDate(date) {
+      if (typeof date === 'string') {
+        this.set('unsavedEntryDate', date);
+      }
     },
 
     updateEntryDescription(inputValue) {
